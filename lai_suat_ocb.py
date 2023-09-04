@@ -34,7 +34,7 @@ for row in column_data[1:]:
 
 # Print Excel daily
 df.to_csv(f'{path}/{file_name}.csv', index=False, encoding='utf-8-sig')
-df.to_csv(f'log/{file_name}.csv', index=False, encoding='utf-8-sig')
+df.to_csv(f'D:/Python/interest-rate-OCB/log/{file_name}.csv', index=False, encoding='utf-8-sig')
 
 # Print Excel summary
 ret = "OK"
@@ -49,4 +49,4 @@ if ret == "OK":
         df.to_excel(writer, sheet_name=today, index=False)
 
 print(df)
-msvcrt.getch()
+# msvcrt.getch()
