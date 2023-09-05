@@ -27,8 +27,8 @@ column_data = table.find_all('tr')
 for row in column_data[1:]:
     row_data = row.find_all('td')
     individual_row_data = [data.text.strip() for data in row_data]
-    for individual_row_data in individual_row_data[1:]:
-        individual_row_data = float(individual_row_data)
+    for i in range(1,3):
+        individual_row_data[i] = float(individual_row_data[i])
     length = len(df)
     df.loc[length] = individual_row_data
 
@@ -37,16 +37,18 @@ df.to_csv(f'{path}/{file_name}.csv', index=False, encoding='utf-8-sig')
 df.to_csv(f'D:/Python/interest-rate-OCB/log/{file_name}.csv', index=False, encoding='utf-8-sig')
 
 # Print Excel summary
-ret = "OK"
-try:
-    df = pd.read_excel(f'{path}/summary.xlsx')
-except:
-    df.to_excel(f'{path}/summary.xlsx', index=False, encoding='utf-8-sig', sheet_name=today)
-    ret = "NG"
+# ret = "OK"
+# try:
+    # df = pd.read_excel(f'{path}/summary.xlsx')
+#     print(df)
+    
+# except:
+#     df.to_excel(f'{path}/summary.xlsx', index=False, encoding='utf-8-sig', sheet_name=today)
+#     ret = "NG"
 
-if ret == "OK":
-    with pd.ExcelWriter(f'{path}/summary.xlsx', mode = 'a', engine='openpyxl',if_sheet_exists="overlay") as writer:
-        df.to_excel(writer, sheet_name=today, index=False)
+# if ret == "OK":
+#     with pd.ExcelWriter(f'{path}/summary.xlsx', mode = 'a', engine='openpyxl',if_sheet_exists="overlay") as writer:
+#         df.to_excel(writer, sheet_name=today, index=False)
 
 print(df)
 # msvcrt.getch()
