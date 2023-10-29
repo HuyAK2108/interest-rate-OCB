@@ -1,4 +1,3 @@
-import msvcrt
 import requests
 from bs4 import BeautifulSoup
 import pandas as pd
@@ -16,8 +15,8 @@ soup = BeautifulSoup(page.text, 'html.parser')
 table = soup.find_all('table')[0]
 
 # Find titles Kỳ hạn Tiền gửi có kỳ hạn Tiết kiệm thông thường Tiết kiệm Online
-world_titles = table.find_all('tr')
-world_table_titles = [title.text.strip() for title in world_titles[0]]
+world_titles = table.find_all('td')
+world_table_titles = [title.text.strip() for title in world_titles]
 
 # Display titles
 df = pd.DataFrame(columns=world_table_titles[0:4])
@@ -36,19 +35,4 @@ for row in column_data[1:]:
 df.to_csv(f'{path}/{file_name}.csv', index=False, encoding='utf-8-sig')
 df.to_csv(f'D:/Python/interest-rate-OCB/log/{file_name}.csv', index=False, encoding='utf-8-sig')
 
-# Print Excel summary
-# ret = "OK"
-# try:
-    # df = pd.read_excel(f'{path}/summary.xlsx')
-#     print(df)
-    
-# except:
-#     df.to_excel(f'{path}/summary.xlsx', index=False, encoding='utf-8-sig', sheet_name=today)
-#     ret = "NG"
-
-# if ret == "OK":
-#     with pd.ExcelWriter(f'{path}/summary.xlsx', mode = 'a', engine='openpyxl',if_sheet_exists="overlay") as writer:
-#         df.to_excel(writer, sheet_name=today, index=False)
-
 print(df)
-# msvcrt.getch()
